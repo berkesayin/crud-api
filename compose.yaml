@@ -1,0 +1,27 @@
+services:
+
+  # postgres database 
+  postgres-db:
+    image: postgres:12
+    container_name: crud-db-c
+    ports:
+      - 5432:5432 
+    environment:
+      - POSTGRES_USER=berke
+      - POSTGRES_PASSWORD=pg-db-1234
+      - POSTGRES_DB=crud_api
+    volumes: 
+      - pgdata:/var/lib/postgresql/data
+ 
+  # postgres admin ui (pgadmin)
+  postgres-admin: 
+    image: dpage/pgadmin4
+    container_name: crud-pg-c
+    ports: 
+      - 8081:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=sayinberke34@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=pg-ui-1234
+
+volumes:
+  pgdata: {}
