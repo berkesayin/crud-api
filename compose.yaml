@@ -1,5 +1,18 @@
 services:
 
+  # java - spring application
+  crud-app:
+    build: .
+    container_name: crud-app-c
+    ports:
+      - 8080:8080
+    environment:
+      - DATABASE_URL=jdbc:postgresql://postgres-db:5432/crud_api
+      - DATABASE_USERNAME=berke
+      - DATABASE_PASSWORD=pg-db-1234
+    depends_on:
+      - postgres-db
+
   # postgres database 
   postgres-db:
     image: postgres:12
