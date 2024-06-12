@@ -13,28 +13,28 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping
+    @GetMapping("/getUsers")
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getUserById/{id}")
     public User getUserById(@PathVariable Long id) {
         return userRepository.findById(id).get();
     }
 
-    @PostMapping
+    @PostMapping("/createUser")
     public User createUser(@RequestBody User user) {
         return userRepository.save(user);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/updateUserById/{id}")
     public User updateUser(@PathVariable Long id, @RequestBody User user) {
         User existingUser = userRepository.findById(id).get();
         existingUser.setName(user.getName());
@@ -42,7 +42,7 @@ public class UserController {
         return userRepository.save(existingUser);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteUserById/{id}")
     public String deleteUser(@PathVariable Long id) {
         try {
             userRepository.deleteById(id);
